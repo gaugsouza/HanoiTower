@@ -56,3 +56,9 @@ a.link:link,a.link:visited,a.link:hover,a.link:focus,a.link:active
 {
   color:white;
 }
+.btn-refer {
+ right: 0;
+ bottom: 0;
+ position: absolute;
+ text-align: center;
+}
