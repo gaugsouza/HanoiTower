@@ -52,3 +52,7 @@
     margin-right: auto;
     width: 80%;
 }
+a.link:link,a.link:visited,a.link:hover,a.link:focus,a.link:active
+{
+  color:white;
+}

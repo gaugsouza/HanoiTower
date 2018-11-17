@@ -23,11 +23,15 @@
 			<img src="../resources/images/home.jpg">
 			<!--Botão que direciona o jogador a tela do jogo -->
 			<p>
-				<button type="button" class="home-btn btn">Jogar</button>
+				<a href="jogo.html" class="home-btn btn link">Jogar</a>
 			</p>
-			<!--Botão responsável por exibir um modal com as informações sobre o jogo e seus desenvolvedores-->
+			<!--Botão responsável por exibir um modal com as informações sobre o jogo-->
 			<p>
 				<button type="button" class="home-btn btn" data-toggle="modal" data-target="#sobre">Sobre</button>
+			</p>
+			<!--Botão responsável por exibir um modal com as informações dos desenvolvedores do jogo-->
+			<p>
+				<button type="button" class="home-btn btn" data-toggle="modal" data-target="#creditos">Créditos</button>
 			</p>	
 		</div>
 
@@ -36,12 +40,14 @@
 			 	<div class="modal-content">
 			  		<!-- Modal Header -->
 					<div class="modal-header">
-						<h4 class="modal-title">Sobre</h4>
+						<h3 class="modal-title">Sobre</h3>
 					  	<button type="button" class="close" data-dismiss="modal">&times;</button>
 					</div>			  
 					<!-- Modal body -->
 					<div class="modal-body">
 						<div  class="home-modal-text">
+							<h3>Histórico:</h3>
+							<br>
 							<p>&emsp;A <b>Torre de Hanói</b> é também bem conhecida como torre bramanismo
 								ou quebra-cabeças do fim do mundo.</p>
 							<img class="home-center-image" src="../resources/images/torre-hanoi.jpg">
@@ -68,6 +74,12 @@
 								Fonte: http://www.utfpr.edu.br/cornelioprocopio/cursos/licenciaturas/Ofertados-
 								neste-Campus/matematica/laboratorios/material-didatico/torre-de-hanoi
 							</p>
+							<h3>Regras:</h3>
+							<br>
+							<p>&emsp;O objetivo do jogo consiste em deslocar todos os discos da primeira haste para a terceira, 
+								respeitando as seguintes regras:</p>
+    						<p>&emsp;&emsp;• Deslocar um disco de cada vez, o qual deverá ser o do topo de uma das três hastes;</p>
+							<p>&emsp;&emsp;• Um Disco não pode ser colocado acima de um menor que ele.</p>
 						</div>
 						
 					</div>			  
@@ -75,9 +87,38 @@
 					<div class="modal-footer">
 					  	<button type="button" class="home-modal-btn btn-sm" data-dismiss="modal">Close</button>
 					</div>
-			  
-				  </div>
 				</div>
-			  </div>
+			</div>
+		</div>
+
+		<div class="modal fade" id="creditos" tabindex="-1">
+			<div class="modal-dialog modal-lg">
+				 <div class="modal-content">
+					  <!-- Modal Header -->
+					<div class="modal-header">
+						<h3 class="modal-title">Créditos</h3>
+						  <button type="button" class="close" data-dismiss="modal">&times;</button>
+					</div>			  
+					<!-- Modal body -->
+					<div class="modal-body">
+						<div  class="home-modal-text">
+							<p>&emsp;Este jogo foi desenvolvido por estudantes do <b>Instituto Federal de Educação, 
+								Ciência e Tecnologia de São Paulo</b> para um trabalho semestral da máteria 
+								<b>Estrutura de Dados (EDDA2)</b> ministrada pelo professor <b>Miguel Angelo 
+								Tancredi Molina</b>.</p>
+							<img class="home-center-image" src="../resources/images/creditos.jpg">
+							<p>&emsp;Os alunos responsáveis pelo desenvolvimento desse site são:</p>
+							<p>&emsp;&emsp;• <b>[BACKEND DEVELOPER]</b> Gabriel Gomes Pereira da Silva - gabrielgps1@gmail.com</p>
+							<p>&emsp;&emsp;• <b>[FRONTEND DEVELOPER]</b> Guilherme Augusto de Souza - guilhermeguis@outlook.com</p>
+							<p>&emsp;&emsp;• <b>[BACKEND DEVELOPER]</b> Vitor Massao Sugai - massao.sg@gmail.com</p>
+						</div>						
+					</div>			  
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						  <button type="button" class="home-modal-btn btn-sm" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
     </body>
 </html>
