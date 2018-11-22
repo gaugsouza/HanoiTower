@@ -3,9 +3,13 @@
              -webkit-background-size: cover;
              -moz-background-size: cover;
              -o-background-size: cover;
-             background-size: cover;">
+             background-size: cover;"
+       id="game-container">
+
+ 
+
     <head>
-        <title>Hanoi</title>
+        <title>Torre de Hanoi</title>
         <!--Definição de Referências:-->
         <!--Charset para definir o idioma utilizado, permitindo assim a utilização de acentos-->
         <meta charset="utf-8">
@@ -17,10 +21,93 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <!--Referência ao arquivo JavaScript do framework Bootstrap utilizado nessa aplicação-->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-    </head>
-    <body>
-        <div style="position: relative;">
-            <a href="index.html" class="home-btn btn link btn-refer">Jogar</a>
-        </div>        
-    </body>
+
+     <link rel="stylesheet" type="text/css" href=../resources/styles/TowerOfHanoi.min.css?v=0.1" />
+     <link rel="stylesheet" type="text/css" href="../resources/styles/DemoPage.css?v=0.1" />
+   </head>
+<body>
+
+<script src="../resources/scripts/jquery-1.7.1.min.js"></script>
+<script src="../resources/scripts/jquery-ui.min.js"></script>
+<script src="../resources/scripts/TowerOfHanoi.min.js?v=0.1"></script>
+<script>
+jQuery(function() {
+  // Inicia o jogo com 3 discos.
+  var game = new Game({
+    numOfDiscs: 3,
+    afterInit: function(g) {
+      jQuery('#max-step').text(g.maxSteps);
+    },
+    afterStep: function(g) {
+      var steps = g.getSteps();
+      jQuery('#step').text(steps);
+
+      setTimeout(function() {
+        if ( g.isWin() === 1 ) {
+          alert("YOU WIN!");
+          g.freeze();
+        } else if (steps >= g.getMaxSteps()) {
+          alert("YOU LOSE!");
+          g.freeze();
+        }
+      }, 200);
+    }
+  });
+
+  var stepInformation = jQuery('#step-information');
+  var stepInfoText;
+
+  game.onPause = function(g) {
+    stepInfoText = stepInformation.html();
+
+    stepInformation.html('Game paused');
+
+    jQuery('#pause').text('Resume');
+  };
+
+  game.onResume = function(g) {
+    stepInformation.html(stepInfoText);
+    jQuery('#pause').text('Pause');
+  }
+
+  jQuery('#pause').click(function(e) {
+    if (game.state === 'playing') {
+      game.pause();
+    } else if (game.state === 'pause') {
+      game.resume();
+    }
+    e.preventDefault();
+  });
+
+  jQuery('#restart').click(function(e) {
+    game.restart();
+    jQuery('#max-step').text(game.maxSteps);
+    jQuery('#step').text(0);
+
+    e.preventDefault();
+  });
+
+  function gameChange() {
+    if (!confirm("This will restart the game. Are you sure with that?")) {
+      return false;
+    }
+
+    var pegs  = jQuery('#number-of-pegs').val();
+    var discs = jQuery('#number-of-discs').val();
+
+    game.restart({
+      numOfPegs: pegs,
+      numOfDiscs: discs,
+      destinationPeg: pegs,
+    });
+
+    jQuery('#max-step').text(game.maxSteps);
+    jQuery('#step').text(0);
+  }
+
+  jQuery('#number-of-pegs').change(gameChange);
+  jQuery('#number-of-discs').change(gameChange);
+});
+</script>
+</body>
 </html>
