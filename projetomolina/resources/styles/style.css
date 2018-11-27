@@ -62,7 +62,9 @@ a.link:link,a.link:visited,a.link:hover,a.link:focus,a.link:active{
 	text-align: center;
 }
 .disc{
-	position:absolute;background-color:red;border:1px solid #000;border-radius:25px
+    position:absolute;
+    background-image: url("noot.jpg");
+    background-repeat: no-repeat, repeat;
 }
 .disc.moveable{
 	cursor:pointer
@@ -71,17 +73,20 @@ a.link:link,a.link:visited,a.link:hover,a.link:focus,a.link:active{
 	opacity:.5
 }
 .peg-container{
-	width:200px;display:inline-block;margin-right:20px
+    width:300px;
+    display:inline-block;
+    margin-right:8%;
+    margin-left:8%;
+    margin-top:45%; 
 }
 .peg-over{
-	background-color:yellow;opacity:.25
+    background-color:yellow;
+    opacity:.25
 }
 .peg-label{
-	font-size:32px;font-weight:bold;text-align:center;border-top:10px solid #000
+
+    border-top:10px solid #000
 }
 .peg-destination .peg-label{
-	border-color:orange
-}
-.peg{
-	position:relative;width:200px
+	border-color:red
 }
