@@ -1,19 +1,19 @@
 <html>
 <head>
-  <title>Tower of Hanoi</title>
+  <title>Torre de Hanói</title>
   <!-- CSS do projeto-->
   <link rel="stylesheet" type="text/css" href="../resources/styles/style.css" />
 </head>
 <body>
 <div class="demo-block" id="main">
-  <h1>Tower Of Hanoi</h1>
+  <h1>Torre de Hanói</h1>
   <div id="game-container"></div>
   <p id="step-information">
-    Your number of steps: <span id="step">0</span>.
-    Maximum steps to move from source peg to destination peg are <span id="max-step">0</span>
+    Quantidade de movimentos feitos: <span id="step">0</span>.
+    Quantidade máxima de movimentos: <span id="max-step">0</span>
   </p>
   <p>
-    <label for="number-of-discs">Number of discs:</label>
+    <label for="number-of-discs">Número de discos:</label>
     <select id="number-of-discs">
       <option>3</option>
       <option>4</option>
@@ -29,7 +29,7 @@
 <script src="../resources/scripts/TowerOfHanoi.min.js"></script>
 <script>
 jQuery(function() {
-  // Inicia o jogo e seleciona o nÃºmero de discos
+  // Inicia o jogo e seleciona o número de discos
   var game = new Game({
     numOfDiscs: 3,
     afterInit: function(g) {
@@ -52,7 +52,7 @@ jQuery(function() {
   var stepInformation = jQuery('#step-information');
   var stepInfoText;
 
-  // FunÃ§Ã£o de restart
+  // Função de restart
   jQuery('#restart').click(function(e) {
     game.restart();
     jQuery('#max-step').text(game.maxSteps);
@@ -60,7 +60,7 @@ jQuery(function() {
     e.preventDefault();
   });
   
-  // FunÃ§Ã£o que alter o nÃºmero de discos no jogo
+  // Função que alter o número de discos no jogo
   function gameChange() {
     if (!confirm("This will restart the game. Are you sure with that?")) {
       return false;
