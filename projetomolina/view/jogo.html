@@ -29,6 +29,7 @@
 <script src="../resources/scripts/TowerOfHanoi.min.js"></script>
 <script>
 jQuery(function() {
+  // Inicia o jogo e seleciona o número de discos
   var game = new Game({
     numOfDiscs: 3,
     afterInit: function(g) {
@@ -50,13 +51,14 @@ jQuery(function() {
   });
   var stepInformation = jQuery('#step-information');
   var stepInfoText;
+  // Função de restart
   jQuery('#restart').click(function(e) {
     game.restart();
     jQuery('#max-step').text(game.maxSteps);
     jQuery('#step').text(0);
     e.preventDefault();
   });
-  // Callback when number of discs or pegs is changed.
+  // Função que alter o número de discos no jogo
   function gameChange() {
     if (!confirm("This will restart the game. Are you sure with that?")) {
       return false;
