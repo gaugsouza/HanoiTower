@@ -39,7 +39,7 @@ jQuery(function() {
       var steps = g.getSteps();
       jQuery('#step').text(steps);
       setTimeout(function() {
-        if ( g.isWin() === 1 ) {
+        if ( g.isWin() == 1 ) {
           alert("You win!");
           g.freeze();
         } else if (steps >= g.getMaxSteps()) {
@@ -51,6 +51,7 @@ jQuery(function() {
   });
   var stepInformation = jQuery('#step-information');
   var stepInfoText;
+
   // Função de restart
   jQuery('#restart').click(function(e) {
     game.restart();
@@ -58,13 +59,14 @@ jQuery(function() {
     jQuery('#step').text(0);
     e.preventDefault();
   });
+  
   // Função que alter o número de discos no jogo
   function gameChange() {
     if (!confirm("This will restart the game. Are you sure with that?")) {
       return false;
     }
     var discs = jQuery('#number-of-discs').val();
-    var pegs  = jQuery('#number-of-pegs').val();
+    var pegs  = 3; //Valor definitivo de pegs
     game.restart({
       numOfPegs: pegs,
       numOfDiscs: discs,
@@ -73,7 +75,9 @@ jQuery(function() {
     jQuery('#max-step').text(game.maxSteps);
     jQuery('#step').text(0);
   }
+
   jQuery('#number-of-discs').change(gameChange);
+  jQuery('#number-of-pegs').change(gameChange);
 });
 </script>
 </body>
