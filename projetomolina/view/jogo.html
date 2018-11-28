@@ -1,102 +1,78 @@
-<html id="game-container">
-    <head>
-        <title>Torre de Hanoi</title>
-        <!--Definição de Referências:-->
-        <!--Charset para definir o idioma utilizado, permitindo assim a utilização de acentos-->
-        <meta charset="utf-8">
-        <!--Referência ao CSS utilizado na aplicação-->
-        <link rel="stylesheet" type="text/css" href="../resources/styles/style.css">
-        <link rel="stylesheet" type="text/css" href="../resources/styles/style.css?v=0.1" />
-
-        <!--Referência ao CSS do framework Bootstrap utilizado nessa aplicação-->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
-        <!--Referência a API do google utilizada para a exibição de modals-->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <!--Referência ao arquivo JavaScript do framework Bootstrap utilizado nessa aplicação-->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-		<script src="../resources/scripts/jquery-1.7.1.min.js"></script>
-		<script src="../resources/scripts/jquery-ui.min.js"></script>
-		<script src="../resources/scripts/TowerOfHanoi.min.js?v=0.1"></script>
-   </head>
+<html>
+<head>
+  <title>Tower of Hanoi</title>
+  <!-- CSS do projeto-->
+  <link rel="stylesheet" type="text/css" href="../resources/styles/style.css" />
+</head>
 <body>
+<div class="demo-block" id="main">
+  <h1>Tower Of Hanoi</h1>
+  <div id="game-container"></div>
+  <p id="step-information">
+    Your number of steps: <span id="step">0</span>.
+    Maximum steps to move from source peg to destination peg are <span id="max-step">0</span>
+  </p>
+  <p>
+    <label for="number-of-discs">Number of discs:</label>
+    <select id="number-of-discs">
+      <option>3</option>
+      <option>4</option>
+      <option>5</option>
+    </select> |
+    <a id="restart" href="#">Restart</a> |
+    <a id="menu"    href="index.html">Menu</a>
+  </p>
+</div>
+
+<script src="../resources/scripts/jquery-1.7.1.min.js"></script>
+<script src="../resources/scripts/jquery-ui.min.js"></script>
+<script src="../resources/scripts/TowerOfHanoi.min.js"></script>
 <script>
-  jQuery(function() {
-    // Inicia o jogo com 3 discos.
-    var game = new Game({
-      numOfDiscs: 3,
-      afterInit: function(g) {
-        jQuery('#max-step').text(g.maxSteps);
-      },
-      afterStep: function(g) {
-        var steps = g.getSteps();
-        jQuery('#step').text(steps);
-  
-        setTimeout(function() {
-          if ( g.isWin() === 1 ) {
-            alert("YOU WIN!");
-            g.freeze();
-          } else if (steps >= g.getMaxSteps()) {
-            alert("YOU LOSE!");
-            g.freeze();
-          }
-        }, 200);
-      }
-    });
-  
-    var stepInformation = jQuery('#step-information');
-    var stepInfoText;
-  
-    game.onPause = function(g) {
-      stepInfoText = stepInformation.html();
-  
-      stepInformation.html('Game paused');
-  
-      jQuery('#pause').text('Resume');
-    };
-  
-    game.onResume = function(g) {
-      stepInformation.html(stepInfoText);
-      jQuery('#pause').text('Pause');
+jQuery(function() {
+  var game = new Game({
+    numOfDiscs: 3,
+    afterInit: function(g) {
+      jQuery('#max-step').text(g.maxSteps);
+    },
+    afterStep: function(g) {
+      var steps = g.getSteps();
+      jQuery('#step').text(steps);
+      setTimeout(function() {
+        if ( g.isWin() === 1 ) {
+          alert("You win!");
+          g.freeze();
+        } else if (steps >= g.getMaxSteps()) {
+          alert("Game over!");
+          g.freeze();
+        }
+      }, 200);
     }
-  
-    jQuery('#pause').click(function(e) {
-      if (game.state === 'playing') {
-        game.pause();
-      } else if (game.state === 'pause') {
-        game.resume();
-      }
-      e.preventDefault();
-    });
-  
-    jQuery('#restart').click(function(e) {
-      game.restart();
-      jQuery('#max-step').text(game.maxSteps);
-      jQuery('#step').text(0);
-  
-      e.preventDefault();
-    });
-  
-    function gameChange() {
-      if (!confirm("This will restart the game. Are you sure with that?")) {
-        return false;
-      }
-  
-      var pegs  = jQuery('#number-of-pegs').val();
-      var discs = jQuery('#number-of-discs').val();
-  
-      game.restart({
-        numOfPegs: pegs,
-        numOfDiscs: discs,
-        destinationPeg: pegs,
-      });
-  
-      jQuery('#max-step').text(game.maxSteps);
-      jQuery('#step').text(0);
-    }
-  
-    jQuery('#number-of-pegs').change(gameChange);
-    jQuery('#number-of-discs').change(gameChange);
   });
+  var stepInformation = jQuery('#step-information');
+  var stepInfoText;
+  jQuery('#restart').click(function(e) {
+    game.restart();
+    jQuery('#max-step').text(game.maxSteps);
+    jQuery('#step').text(0);
+    e.preventDefault();
+  });
+  // Callback when number of discs or pegs is changed.
+  function gameChange() {
+    if (!confirm("This will restart the game. Are you sure with that?")) {
+      return false;
+    }
+    var discs = jQuery('#number-of-discs').val();
+    var pegs  = jQuery('#number-of-pegs').val();
+    game.restart({
+      numOfPegs: pegs,
+      numOfDiscs: discs,
+      destinationPeg: pegs,
+    });
+    jQuery('#max-step').text(game.maxSteps);
+    jQuery('#step').text(0);
+  }
+  jQuery('#number-of-discs').change(gameChange);
+});
 </script>
 </body>
 </html>
