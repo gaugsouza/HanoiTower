@@ -1,84 +1,102 @@
 <html>
-<head>
-  <title>Torre de Han�i</title>
-  <!-- CSS do projeto-->
-  <link rel="stylesheet" type="text/css" href="../resources/styles/style.css" />
-</head>
-<body>
-<div class="demo-block" id="main">
-  <h1>Torre de Han�i</h1>
-  <div id="game-container"></div>
-  <p id="step-information">
-    Quantidade de movimentos feitos: <span id="step">0</span>.
-    Quantidade m�xima de movimentos: <span id="max-step">0</span>
-  </p>
-  <p>
-    <label for="number-of-discs">N�mero de discos:</label>
-    <select id="number-of-discs">
-      <option>3</option>
-      <option>4</option>
-      <option>5</option>
-    </select> |
-    <a id="restart" href="#">Restart</a> |
-    <a id="menu"    href="index.html">Menu</a>
-  </p>
-</div>
-
-<script src="../resources/scripts/jquery-1.7.1.min.js"></script>
-<script src="../resources/scripts/jquery-ui.min.js"></script>
-<script src="../resources/scripts/TowerOfHanoi.min.js"></script>
-<script>
-jQuery(function() {
-  // Inicia o jogo e seleciona o n�mero de discos
-  var game = new Game({
-    numOfDiscs: 3,
-    afterInit: function(g) {
-      jQuery('#max-step').text(g.maxSteps);
-    },
-    afterStep: function(g) {
-      var steps = g.getSteps();
-      jQuery('#step').text(steps);
-      setTimeout(function() {
-        if ( g.isWin() == 1 ) {
-          alert("You win!");
-          g.freeze();
-        } else if (steps >= g.getMaxSteps()) {
-          alert("Game over!");
-          g.freeze();
+  <head>
+    <title>Torre de Hanói</title>
+    <!--Definição do tipo de codificação dos caracteres-->
+    <meta charset="utf-8">
+    <!-- CSS do projeto-->
+    <link rel="stylesheet" type="text/css" href="../resources/styles/style.css"/>
+    <!--Importação do JQuery-->
+    <script src="../resources/scripts/jquery-1.7.1.min.js"></script>
+    <script src="../resources/scripts/jquery-ui.min.js"></script>
+    <!--Importação do Script principal do jogo-->
+    <script src="../resources/scripts/jogo.js"></script>
+  </head>
+  <body class="game-background">
+    <!--Menu-->
+    <nav class="game-menu">
+      <div class="menu-elements row">
+        <!--Botão que retorna à Home page-->
+        <div class="col" style="float: left">
+          <button type="button" class="btn menu-game-btn" onclick="location.href='index.html'">Início</button>
+        </div>
+        <!--Informações sobre o jogo-->
+        <div class="col" style="float: left; margin-left: 10px;">
+          Quantidade de movimentos feitos: <span id="step">0</span>.
+          <br>Quantidade máxima de movimentos: <span id="max-step">0</span>.
+        </div>
+        <!--Botão para reiniciar o jogo-->
+        <div class="col" style="float: right;">
+          <button type="button" id="restart" class="btn menu-game-btn" onclick="location.href='#'">Restart</button>
+        </div>
+        <!--Selectbox utilizada para alterar o numero de discos do jogo-->
+        <div class="col" style="float: right; margin-right:10px;">
+         <label for="number-of-discs">Número de discos:</label>
+          <select id="number-of-discs">
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+      </div>
+    </nav>
+    <!--Div responsável pelo jogo executado em JS-->
+    <div class="demo-block" id="main">
+      <div id="game-container"></div>
+    </div>
+    <!--Script das funções do menu-->
+    <script>
+      jQuery(function() {
+      // Inicia o jogo e seleciona o número de discos
+        var game = new Game({
+          qtdDiscos: 3,
+          //Atribuição do número máximo de passos ao HTML através do JQuery
+          afterInit: function(g) {
+            jQuery('#max-step').text(g.maxSteps);
+          },
+          //Após cada jogada os passos são atualizados e é chamada a função "isWin()" para checar se o jogador venceu, perdeu ou ainda não terminou
+          afterStep: function(g) {
+            var steps = g.getSteps();
+            //Atribuido o número de passos realizados para o html através do JQuery
+            jQuery('#step').text(steps);
+            //Checagem se o jogador venceu ou não, através do retorno da função "isWin()"
+            setTimeout(function() {
+              if(g.isWin() == 1 ) {
+                alert("You win!");
+                g.freeze();
+              } else if (steps >= g.getMaxSteps()) {
+                alert("Game over!");
+                g.freeze();
+              }
+            }, 200);
+          }
+        });
+        // Função de restart e atribuição da mesma ao html através do JQuery
+        jQuery('#restart').click(function(e) {
+          game.restart();
+          jQuery('#max-step').text(game.maxSteps);
+          jQuery('#step').text(0);
+          e.preventDefault();
+        });
+        //Função que alter o número de discos no jogo
+        function gameChange() {
+          if (!confirm("Isso irá reiniciar o jogo, tem certeza disso?")) {
+            return false;
+          }
+          //Definição dos elementos do jogo e reínicio do mesmo
+          var discs = jQuery('#number-of-discs').val();
+          var pegs  = 3; //Valor definitivo de pegs
+          game.restart({
+            numOfPegs: pegs,
+            qtdDiscos: discs,
+            destinationPeg: pegs,
+          });
+          jQuery('#max-step').text(game.maxSteps);
+          jQuery('#step').text(0);
         }
-      }, 200);
-    }
-  });
-  var stepInformation = jQuery('#step-information');
-  var stepInfoText;
 
-  // Fun��o de restart
-  jQuery('#restart').click(function(e) {
-    game.restart();
-    jQuery('#max-step').text(game.maxSteps);
-    jQuery('#step').text(0);
-    e.preventDefault();
-  });
-  
-  // Fun��o que alter o n�mero de discos no jogo
-  function gameChange() {
-    if (!confirm("Isso ir� reiniciar o jogo, tem certeza disso?")) {
-      return false;
-    }
-    var discs = jQuery('#number-of-discs').val();
-    var pegs  = 3; //Valor definitivo de pegs
-    game.restart({
-      numOfPegs: pegs,
-      numOfDiscs: discs,
-      destinationPeg: pegs,
-    });
-    jQuery('#max-step').text(game.maxSteps);
-    jQuery('#step').text(0);
-  }
-
-  jQuery('#number-of-discs').change(gameChange);
-  jQuery('#number-of-pegs').change(gameChange);
-});
-</script>
-</body>
+        jQuery('#number-of-discs').change(gameChange);
+        jQuery('#number-of-pegs').change(gameChange);
+        });
+    </script>
+  </body>
 </html>

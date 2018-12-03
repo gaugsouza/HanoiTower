@@ -1,4 +1,6 @@
-﻿.home-position {
+﻿/*Caratacterísticas da Home Page*/
+/*Posição do menu central*/
+.home-position {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -6,11 +8,13 @@
     max-width: 100%;
     max-height: 100%;
 }
+/*Texto principal da home*/
 .home-title{
     font-size: 40px;
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: black;
 }
+/*Botões da home*/
 .home-btn{
     background: black !important;
     border: black !important;
@@ -20,6 +24,7 @@
     padding-bottom: 2% !important;
     cursor: pointer;
 }
+/*Botões da home quando o cursor passa por cima*/
 .home-btn:hover
 {
     background: red !important;
@@ -27,6 +32,7 @@
     width: 30%;
     height: 30%;    
 }
+/*Botões dos modais da home*/
 .home-modal-btn{
     background: black !important;
     border: black !important;
@@ -36,97 +42,113 @@
     padding-bottom: 10px !important;
     cursor: pointer;
 }
+/*Botões dos modais da home quando o cursor passa por cima*/
 .home-modal-btn:hover{
     background: red !important;
     border: red !important;
 }
+/*Formatação do texto dos modais*/
 .home-modal-text{
     text-align: justify;
     text-justify: inter-word;
     margin-left: 2.5%;
     margin-right: 1.5%
 }
+/*Centralização das imagens da home*/
 .home-center-image{
     display: block;
     margin-left: auto;
     margin-right: auto;
     width: 80%;
 }
+/*Desativação das diferentes cores de link*/
 a.link:link,a.link:visited,a.link:hover,a.link:focus,a.link:active{
-	color:white;
-}
-.btn-refer {
-	right: 0;
-	bottom: 0;
-	position: absolute;
-	text-align: center;
+  color:white;
 }
 
-/* Discos e hastes */
+/*Tela do Jogo*/
+/*Inicio características dos discos*/
 .disc {
-    position: absolute;
-    background-color: red;
-    border: 1px solid #000;
-    border-radius: 25px;
-  }
-  .disc.moveable {
-    cursor: pointer;
-  }
-  .disc.moveable:hover {
-    opacity: 0.5;
-  }
-  .peg-container {
-    width: 200px;
-    display: inline-block;
-    margin-right: 20px;
-  }
-  .peg-over {
-    background-color: yellow;
-    opacity: 0.25;
-  }
-  .peg-label {
-    font-size: 32px;
-    font-weight: bold;
-    text-align: center;
-    border-top: 10px solid #000;
-  }
-  .peg-destination .peg-label {
-    border-color: orange;
-  }
-  .peg {
-    position: relative;
-    width: 200px;
-  }
-
-/* Caixa atrás do jogo */
-body {
-    background-color: #efefef;
-  }
-  
-  h1 {
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 40;
-  }
-  
-  .demo-block {
-    width: 860px;
-    margin: 0 auto;
-    padding: 20px;
-    text-align: center;
-  }
-  #main {
-    background-color: #fff;
-    border: 1px solid #ccc;
-    border-radius: 25px;
-    font-family: verdana;
-  }
-  #step-information span {
-    font-weight: bold;
-    font-style: italic;
-    font-size:  120%;
-  }
-  #footer {
-    padding: 5px;
-    font-family: verdana;
-    font-size: 11px;
-  }
+  position: absolute;
+}
+/*Disco que pode ser movido (apenas o primeiro)*/
+.disc.moveable {
+  cursor: pointer;
+}
+.disc.moveable:hover {
+  opacity: 0.5;
+}
+/*Fim características do disco*/
+/*Inicio características das hastes*/
+.peg-container {
+  width: 400px;
+  display: inline-block;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+.peg {
+  position: relative;
+}
+.peg-over {
+  background-color: yellow;
+  opacity: 0.25;
+}
+.peg-label {
+  border-top: 10px solid #800000;
+}
+.peg-destination .peg-label {
+  border-color: orange;
+}
+/*Fim características das hastes*/
+/*Background da tela jogo*/
+.game-background {
+  background: url("images/background.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100%;     
+  overflow: hidden;
+}
+/*Div principal da aplicação em sí*/
+.demo-block {
+  position: fixed;
+  width: 100%;
+  bottom: 0;    
+  margin: 0 auto;    
+  text-align: center;
+}
+/*Margens dos elementos do menu*/
+.menu-elements{
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+/*Inicio estilização dos botões do menu da tela jogo*/
+.menu-game-btn{
+  background: black !important;
+  border: black !important;
+  color: white;
+  cursor: pointer;
+  height: 40px;
+  width: 120px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.menu-game-btn:hover
+{
+  background: red !important;
+  border: red !important;
+  width: 150px;    
+}
+/*Fim da estilização dos botões do menu da tela jogo*/
+/*Estilização do menu da tela jogo*/
+.game-menu {
+  position:absolute;
+  top:0;
+  bottom:0;
+  left:0;
+  width:100%;
+  height:60px;
+  background: #fff;
+  border-bottom: solid 7px red;
+  overflow: auto;
+}
